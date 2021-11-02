@@ -36,6 +36,10 @@
         <servlet-name>srv_reporte</servlet-name>
         <servlet-class>servlets.srv_reporte</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>srv_comprador</servlet-name>
+        <servlet-class>servlets.srv_comprador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>srv_permisos</servlet-name>
         <url-pattern>/srv_permisos</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>srv_reporte</servlet-name>
         <url-pattern>/srv_reporte</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>srv_comprador</servlet-name>
+        <url-pattern>/srv_comprador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

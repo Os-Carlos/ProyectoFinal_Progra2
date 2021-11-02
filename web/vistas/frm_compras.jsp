@@ -19,111 +19,128 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>	
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">        
     </head>
-    
+
     <body>
-        <div class="jumbotron text-center">
-            <h4 class="text-success">Solicitud de Compras</h4>
-        </div>
-        <div class="container">
-            <form action="srvcomprador" method="post" class="form-group">
+        <nav class="navbar navbar-light my-0" style="background-color: #e3f2fd;"><h1>Solicitud de Compras</h1></nav>  
 
-                <label for="lbl_idcompra"><b>Id compra</b></label>
-                <input type="text" name="txt_idcompra" id="txt_idcompra" class="form-control" value="0"readonly>
+        <div class="container-fluid my-2 px-5">
+            <div class="row" id="contenido">
+                <div class="col">
+                    <form action="../srv_comprador" method="post" class="form-group">
+                        <label for="lbl_idcompra" style="display: none"><b>Id compra</b></label>
+                        <input type="text" name="txt_idcompra" id="txt_idcompra" class="form-control" value="0"readonly style="display: none">
+                        <label for="lbl_idfactura"><b>N# Factura</b></label>
+                        <input type="text" name="txt_idfactura" id="txt_idfactura" class="form-control" placeholder="Ejemplo: A001" required>
+                        <label for="lbl_idproveedor"><b>Codigo del proveedor</b></label>
+                        <input type="text" name="txt_idproveedor" id="txt_idproveedor" class="form-control" placeholder="Ejemplo: 001" required>
+                        <label for="lbl_idcompradetalle"><b>Id Detalle de la compra </b></label>
+                        <input type="text" name="txt_idcompradetalle" id="txt_idcompradetalle" class="form-control" placeholder="Ejemplo:DC001" required>
+                        <label for="lbl_fecha" ><b>Fecha </b></label>
+                        <input type="date"  name="txt_fecha" id="txt_fecha" class="form-control" required>
+                        <label for="lbl_idproducto"><b>producto</b></label>
+                        <input type="text" name="txt_producto" id="txt_producto" class="form-control" placeholder="Ejemplo:Galletas" required>
+                       
+                        <div class="row">
+                            <div class="col">
+                                <label for="lbl_cantidad"><b>Cantidades</b></label>
+                                <input type="text" name="txt_cantidad" id="txt_cantidad" class="form-control" placeholder="Ejemplo: 10" required>
+                            </div>
+                            <div class="col">
+                                <label for="lbl_idfactura"><b>Precio</b></label>
+                                <input type="text" name="txt_precio" id="txt_precio" class="form-control" placeholder="Ejemplo: 100" required>
+                            </div>
+                        </div>
+                        
+                        <br>
+                        <button type="button" id="btn_limpiar" name="btn_limpiar" class="btn btn-primary" style="display:none" onclick="limpiar()"><i class="bi bi-eraser"></i>Limpiar</button> 
+                        <button value="agregar" id="btn_agregar" name="btn_agregar" class="btn btn-success"><i class="bi bi-plus"></i>Agregar</button>                               
+                        <button value="modificar" id="btn_modificar" name="btn_modificar" class="btn btn-warning" style="display:none"><i class="bi bi-pencil"></i>Modificar</button>                               
+                        <button value="eliminar" id="btn_eliminar" name="btn_eliminar" class="btn btn-danger" style="display:none; margin-left: 10px" onclick="javascript:if (!confirm('Desea eliminar este registro?'))
+                                    return false"><i class="bi bi-trash"></i>Eliminar</button> 
+                    </form>
+                </div>
 
-
-                <label for="lbl_idfactura"><b>N# Factura</b></label>
-                <input type="text" name="txt_idfactura" id="txt_idfactura" class="form-control" placeholder="Ejemplo: A001" required>
-
-                <label for="lbl_idproveedor"><b>Codigo del proveedor</b></label>
-                <input type="text" name="txt_idproveedor" id="txt_idproveedor" class="form-control" placeholder="Ejemplo: 001" required>
-
-                <label for="lbl_idcompradetalle"><b>Id Detalle de la compra </b></label>
-                <input type="text" name="txt_idcompradetalle" id="txt_idcompradetalle" class="form-control" placeholder="Ejemplo:DC001" required>
-
-                <label for="lbl_fecha" ><b>Fecha </b></label>
-                <input type="date"  name="txt_fecha" id="txt_fecha" class="form-control" required>
-
-                <label for="lbl_idproducto"><b>producto</b></label>
-                <input type="text" name="txt_producto" id="txt_producto" class="form-control" placeholder="Ejemplo:Galletas" required>
-
-                <label for="lbl_cantidad"><b>Cantidades</b></label>
-                <input type="text" name="txt_cantidad" id="txt_cantidad" class="form-control" placeholder="Ejemplo: 10" required>
-
-                <label for="lbl_idfactura"><b>Precio</b></label>
-                <input type="text" name="txt_precio" id="txt_precio" class="form-control" placeholder="Ejemplo: 100" required>
-
-                <br>
-
-                <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-primary btn-lg">Agregar</button>
-                <button name="btn_modificar" id="btn_modificar"  value="modificar" class="btn btn-warning btn-lg">Modificar</button>
-                <button name="btn_eliminar" id="btn_eliminar"  value="eliminar" class="btn btn-danger btn-lg" onclick="javascript:if (!confirm('!Desea eliminar?!'))
-                            return false">Eliminar</button>
-
-            </form>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>idfactura</th>
-                        <th>idproveedor</th>
-                        <th>idcompradetalle</th>
-                        <th>fecha</th>
-                        <th>producto</th>
-                        <th>cantidad</th>
-                        <th>precio</th>
-                    </tr>
-                </thead>
-                <tbody id="tbl_compradores">
-                    <%
-                        comprador Comprador = new comprador();
-                        DefaultTableModel tabla = new DefaultTableModel();
-                        tabla = Comprador.leer();
-                        for (int t = 0; t < tabla.getRowCount(); t++) {
-                            out.println("<tr data-idcompra=" + tabla.getValueAt(t, 0) + ">");
-                            out.println("<td>" + tabla.getValueAt(t, 1) + "</td>");
-                            out.println("<td>" + tabla.getValueAt(t, 2) + "</td>");
-                            out.println("<td>" + tabla.getValueAt(t, 3) + "</td>");
-                            out.println("<td>" + tabla.getValueAt(t, 4) + "</td>");
-                            out.println("<td>" + tabla.getValueAt(t, 5) + "</td>");
-                            out.println("<td>" + tabla.getValueAt(t, 6) + "</td>");
-                            out.println("<td>" + tabla.getValueAt(t, 7) + "</td>");
-                            out.println("</tr>");
-                        }
-
-
-                    %>
-                </tbody>
-            </table>
-
+                <div class="col">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>idfactura</th>
+                                <th>idproveedor</th>
+                                <th>idcompradetalle</th>
+                                <th>fecha</th>
+                                <th>producto</th>
+                                <th>cantidad</th>
+                                <th>precio</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_compradores">
+                            <%
+                                comprador Comprador = new comprador();
+                                DefaultTableModel tabla = new DefaultTableModel();
+                                tabla = Comprador.leer();
+                                for (int t = 0; t < tabla.getRowCount(); t++) {
+                                    out.println("<tr data-idcompra=" + tabla.getValueAt(t, 0) + ">");
+                                    out.println("<td>" + tabla.getValueAt(t, 1) + "</td>");
+                                    out.println("<td>" + tabla.getValueAt(t, 2) + "</td>");
+                                    out.println("<td>" + tabla.getValueAt(t, 3) + "</td>");
+                                    out.println("<td>" + tabla.getValueAt(t, 4) + "</td>");
+                                    out.println("<td>" + tabla.getValueAt(t, 5) + "</td>");
+                                    out.println("<td>" + tabla.getValueAt(t, 6) + "</td>");
+                                    out.println("<td>" + tabla.getValueAt(t, 7) + "</td>");
+                                    out.println("</tr>");
+                                }
+                            %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>                
         </div>       
 
         <script type="text/javascript">
+            function limpiar() {
 
-                    $('#tbl_compradores').on('click', 'tr td', function (evt) {
-                        var target, idcompra, idfactura, idproveedor, idcompradetalle, fecha, producto, cantidad, precio;
-                        target = $(event.target);
-                        idcompra = target.parent().data('idcompra');
-                        idfactura = target.parent("tr").find("td").eq(0).html();
-                        idproveedor = target.parent("tr").find("td").eq(1).html();
-                        idcompradetalle = target.parent("tr").find("td").eq(2).html();
-                        fecha = target.parent("tr").find("td").eq(3).html();
-                        producto = target.parent("tr").find("td").eq(4).html();
-                        cantidad = target.parent("tr").find("td").eq(5).html();
-                        precio = target.parent("tr").find("td").eq(6).html();
-                        $("#txt_idcompra").val(idcompra);
-                        $("#txt_idfactura").val(idfactura);
-                        $("#txt_idproveedor").val(idproveedor);
-                        $("#txt_idcompradetalle").val(idcompradetalle);
-                        $("#txt_fecha").val(fecha);
-                        $("#txt_producto").val(producto);
-                        $("#txt_cantidad").val(cantidad);
-                        $("#txt_precio").val(precio);
+                $("#txt_idfactura").val('');
+                $("#txt_idproveedor").val('');
+                $("#txt_idcompradetalle").val('');
+                $("#txt_fecha").val('');
+                $("#txt_producto").val('');
+                $("#txt_cantidad").val('');
+                $("#txt_precio").val('');
 
-                    });
+                $("#lbl_idcompra").hide(1);
+                $("#txt_idcompra").hide(1);
+                $("#btn_limpiar").hide(1);
+                $("#btn_modificar").hide(1);
+                $("#btn_eliminar").hide(1);
+                $("#btn_agregar").show(1);
+            }
+            $('#tbl_compradores').on('click', 'tr td', function (evt) {
+                var target, idcompra, idfactura, idproveedor, idcompradetalle, fecha, producto, cantidad, precio;
+                target = $(event.target);
+                idcompra = target.parent().data('idcompra');
+                idfactura = target.parent("tr").find("td").eq(0).html();
+                idproveedor = target.parent("tr").find("td").eq(1).html();
+                idcompradetalle = target.parent("tr").find("td").eq(2).html();
+                fecha = target.parent("tr").find("td").eq(3).html();
+                producto = target.parent("tr").find("td").eq(4).html();
+                cantidad = target.parent("tr").find("td").eq(5).html();
+                precio = target.parent("tr").find("td").eq(6).html();
+                $("#txt_idcompra").val(idcompra);
+                $("#txt_idfactura").val(idfactura);
+                $("#txt_idproveedor").val(idproveedor);
+                $("#txt_idcompradetalle").val(idcompradetalle);
+                $("#txt_fecha").val(fecha);
+                $("#txt_producto").val(producto);
+                $("#txt_cantidad").val(cantidad);
+                $("#txt_precio").val(precio);
 
+                $("#lbl_idcompra").show(1);
+                $("#txt_idcompra").show(1);
+                $("#btn_limpiar").show(1);
+                $("#btn_modificar").show(1);
+                $("#btn_eliminar").show(1);
+                $("#btn_agregar").hide(1);
+            });
         </script>
-
-
-
-
     </body>
 </html>
