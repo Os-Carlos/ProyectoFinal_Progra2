@@ -1,0 +1,142 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap');
+
+/*---login---*/
+#body_login{
+    display: flex;
+    align-items: center;
+    padding-top: 200px;
+    background:  linear-gradient(to left, #e9ed7e, #a163d4);
+}
+
+.form-signin{
+    background-color: #ffffff;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    padding: 15px;
+    border-radius: 10px 0 10px 0;
+    margin: auto;
+    border: none;
+}
+
+.form-signin .form-control{
+    border-radius: 15px;
+}
+
+#btn_login{
+    border-radius: 10px 0 10px 0;
+    background:  linear-gradient(to left, #e9ed7e, #a163d4);
+    color: #000000;
+    border: none;
+    transition-duration: 0.4s;
+}
+
+#btn_login:hover{
+    background:  linear-gradient(to left, #a163d4, #e9ed7e);
+}
+
+
+/*---menu---*/
+#body_menu{
+    overflow: hidden;
+    font-weight: 300;
+    color: #1a5cc7;
+}
+
+#sidebar-container{
+    min-height: 100vh;
+}
+
+#sidebar-container .logo{
+    text-align: center;
+    padding: 10px 15px;
+}
+
+#sidebar-container .menu{
+    width: 180px;    
+}
+
+#sidebar-container .menu a{
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+#sidebar-container .menu i{
+    padding-right: 5px;
+    font-size: 1.5rem;
+}
+
+#btn_perfil{
+    border: none;
+    background-color: #191fcf;  
+    color: #ffffff;
+}
+
+.bg-primary{
+    background-color: #191fcf !important;
+}
+
+.dropup{
+    position: fixed;
+    bottom: 10px;
+}
+
+a{
+    text-decoration: none;
+}
+
+#contenido{
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+#fr_contenido{
+    border: none;
+    padding: 0;
+    min-width: 100%;
+    min-height: 100vh;
+}
+
+/*pagina de bienvenida*/
+#body_bienvenida{
+     background-image: url(https://images.pexels.com/photos/1631677/pexels-photo-1631677.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); 
+     background-size: 100% 100vh;
+     font-family: 'Zen Kurenaido', sans-serif;
+}
+
+#div_clima{
+    border-radius: 10px;
+    max-width: 420px;
+    margin-top: 160px;     
+    background: rgba(188, 210, 247, .3);
+}
+
+/*frm_clientes*/
+#txt_buscarCliente{
+    width: 200px;
+}
+
+#div_tbl_clientes{
+    max-height: 500px;
+}
+
+i{
+    margin-right: 5px;
+}
+
+.alert{
+    padding-top: 0 !important;    
+    padding-bottom: 0 !important; 
+    padding-right: 0 !important; 
+    width:325px;  
+}
+
+#div_alertas button{
+    border: none;
+    margin-left: 55px;
+    background-color: transparent;
+}
+
+
