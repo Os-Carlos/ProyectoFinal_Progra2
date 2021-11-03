@@ -6,7 +6,6 @@
 
 <%@page import="modelo.comprador" %>
 <%@page import="javax.swing.table.DefaultTableModel" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -21,13 +20,45 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-light my-0" style="background-color: #e3f2fd;"><h1>Solicitud de Compras</h1></nav>  
+        <nav class="navbar navbar-light justify-content-center my-0 justify-content-center" style="background-color: #e3f2fd;"><h1>COMPRAS</h1></nav>  
+
+        <!--alertas-->
+        <div class="d-flex justify-content-center py-1" id="div_alertas">
+            <%
+                if (request.getParameter("accion") != null) {
+                    if (request.getParameter("accion").equals("A")) {
+                        out.println("<div class='alert alert-success alert-dismissible' role='alert'>");
+                        out.println("Registro Realizado con Éxito!!");
+                        out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+                        out.println("</div>");
+                    }
+                    if (request.getParameter("accion").equals("M")) {
+                        out.println("<div class='alert alert-info alert-dismissible' role='alert'>");
+                        out.println("Registro Modificado con Éxito!!");
+                        out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+                        out.println("</div>");
+                    }
+                    if (request.getParameter("accion").equals("E")) {
+                        out.println("<div class='alert alert-warning alert-dismissible' role='alert'>");
+                        out.println("Registro Eliminado con Éxito!!");
+                        out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+                        out.println("</div>");
+                    }
+                    if (request.getParameter("accion").equals("error")) {
+                        out.println("<div class='alert alert-danger alert-dismissible' role='alert'>");
+                        out.println("Ha ocurrido un error!!");
+                        out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+                        out.println("</div>");
+                    }
+                }
+            %>
+        </div>
 
         <div class="container-fluid my-2 px-5">
             <div class="row" id="contenido">
                 <div class="col">
                     <form action="../srv_comprador" method="post" class="form-group">
-                        <label for="lbl_idcompra" style="display: none"><b>Id compra</b></label>
+                        <label for="lbl_idcompra" id="lbl_idcompra"  style="display: none"><b>Id compra</b></label>
                         <input type="text" name="txt_idcompra" id="txt_idcompra" class="form-control" value="0"readonly style="display: none">
                         <label for="lbl_idfactura"><b>N# Factura</b></label>
                         <input type="text" name="txt_idfactura" id="txt_idfactura" class="form-control" placeholder="Ejemplo: A001" required>
@@ -39,7 +70,7 @@
                         <input type="date"  name="txt_fecha" id="txt_fecha" class="form-control" required>
                         <label for="lbl_idproducto"><b>producto</b></label>
                         <input type="text" name="txt_producto" id="txt_producto" class="form-control" placeholder="Ejemplo:Galletas" required>
-                       
+
                         <div class="row">
                             <div class="col">
                                 <label for="lbl_cantidad"><b>Cantidades</b></label>
@@ -50,7 +81,7 @@
                                 <input type="text" name="txt_precio" id="txt_precio" class="form-control" placeholder="Ejemplo: 100" required>
                             </div>
                         </div>
-                        
+
                         <br>
                         <button type="button" id="btn_limpiar" name="btn_limpiar" class="btn btn-primary" style="display:none" onclick="limpiar()"><i class="bi bi-eraser"></i>Limpiar</button> 
                         <button value="agregar" id="btn_agregar" name="btn_agregar" class="btn btn-success"><i class="bi bi-plus"></i>Agregar</button>                               
@@ -61,37 +92,49 @@
                 </div>
 
                 <div class="col">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>idfactura</th>
-                                <th>idproveedor</th>
-                                <th>idcompradetalle</th>
-                                <th>fecha</th>
-                                <th>producto</th>
-                                <th>cantidad</th>
-                                <th>precio</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbl_compradores">
-                            <%
-                                comprador Comprador = new comprador();
-                                DefaultTableModel tabla = new DefaultTableModel();
-                                tabla = Comprador.leer();
-                                for (int t = 0; t < tabla.getRowCount(); t++) {
-                                    out.println("<tr data-idcompra=" + tabla.getValueAt(t, 0) + ">");
-                                    out.println("<td>" + tabla.getValueAt(t, 1) + "</td>");
-                                    out.println("<td>" + tabla.getValueAt(t, 2) + "</td>");
-                                    out.println("<td>" + tabla.getValueAt(t, 3) + "</td>");
-                                    out.println("<td>" + tabla.getValueAt(t, 4) + "</td>");
-                                    out.println("<td>" + tabla.getValueAt(t, 5) + "</td>");
-                                    out.println("<td>" + tabla.getValueAt(t, 6) + "</td>");
-                                    out.println("<td>" + tabla.getValueAt(t, 7) + "</td>");
-                                    out.println("</tr>");
-                                }
-                            %>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive" style="max-height: 500px">
+                        <table class="table table-hover">
+                            <thead align="center" class="align-middle">
+                                <tr>
+                                    <th>
+                                        Id
+                                        Factura
+                                    </th>
+                                    <th>
+                                        Id 
+                                        Proveedor
+                                    </th>
+                                    <th>
+                                        Id
+                                        Compra
+                                        Detalle
+                                    </th>
+                                    <th>Fecha</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl_compradores" align="center" class="align-middle">
+                                <%
+                                    comprador Comprador = new comprador();
+                                    DefaultTableModel tabla = new DefaultTableModel();
+                                    tabla = Comprador.leer();
+                                    for (int t = 0; t < tabla.getRowCount(); t++) {
+                                        out.println("<tr data-idcompra=" + tabla.getValueAt(t, 0) + ">");
+                                        out.println("<td>" + tabla.getValueAt(t, 1) + "</td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 2) + "</td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 3) + "</td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 4) + "</td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 5) + "</td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 6) + "</td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 7) + "</td>");
+                                        out.println("</tr>");
+                                    }
+                                %>
+                            </tbody>
+                        </table>
+                    </div>                    
                 </div>
             </div>                
         </div>       

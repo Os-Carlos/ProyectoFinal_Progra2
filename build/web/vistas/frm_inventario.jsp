@@ -6,7 +6,7 @@
 
 <%@page import="modelo.inventarioT"%>
 <%@page import="javax.swing.table.DefaultTableModel"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,7 +20,7 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-light my-0" style="background-color: #e3f2fd;"><h1>INVENTARIO</h1></nav>  
+        <nav class="navbar navbar-light justify-content-center my-0" style="background-color: #e3f2fd;"><h1>INVENTARIO</h1></nav>  
 
         <!--alertas-->
         <div class="d-flex justify-content-center py-1" id="div_alertas">
@@ -28,19 +28,19 @@
                 if (request.getParameter("accion") != null) {
                     if (request.getParameter("accion").equals("A")) {
                         out.println("<div class='alert alert-success alert-dismissible' role='alert'>");
-                        out.println("Registro Realizado con Ã‰xito!!");
+                        out.println("Registro Realizado con Éxito!!");
                         out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
                         out.println("</div>");
                     }
                     if (request.getParameter("accion").equals("M")) {
                         out.println("<div class='alert alert-info alert-dismissible' role='alert'>");
-                        out.println("Registro Modificado con Ã‰xito!!");
+                        out.println("Registro Modificado con Éxito!!");
                         out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
                         out.println("</div>");
                     }
                     if (request.getParameter("accion").equals("E")) {
                         out.println("<div class='alert alert-warning alert-dismissible' role='alert'>");
-                        out.println("Registro Eliminado con Ã‰xito!!");
+                        out.println("Registro Eliminado con Éxito!!");
                         out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
                         out.println("</div>");
                     }
@@ -66,7 +66,7 @@
                         <input type="text" class="form-control" name="txt_existencias" id="txt_existencias"  required>
                         <label for="lbl_precio" ><b>Precio (Q)</b></label>
                         <input type="text" class="form-control" name="txt_precio" id="txt_precio"  required>
-                        <label for="lbl_des" ><b>DescripciÃ³n</b></label>
+                        <label for="lbl_des" ><b>Descripción</b></label>
                         <input type="text" class="form-control" name="txt_des" id="txt_des"  required>
                         <br>
                         <button type="button" id="btn_limpiar" name="btn_limpiar" class="btn btn-primary" style="display:none" onclick="limpiar()"><i class="bi bi-eraser"></i>Limpiar</button> 
@@ -77,35 +77,38 @@
                     </form>
                 </div>
                 <div class="col">
-                    <table class="table table-hover">
-                        <thead align="center">
-                            <tr>
-                                <th>Id</th>
-                                <th>nombre</th>
-                                <th>Existencias</th>
-                                <th>precio (Q)</th>
-                                <th>DescripciÃ³n</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbl_inventario" align="center">
-                            <%
-                                inventarioT inventario = new inventarioT();
-                                DefaultTableModel tabla = new DefaultTableModel();
-                                tabla = inventario.leer();
-                                for (int t = 0; t < tabla.getRowCount(); t++) {
-                                    out.println("<td>" + tabla.getValueAt(t, 0) + "</td>");
-                                    out.println("<td>" + tabla.getValueAt(t, 1) + "</td>");
-                                    out.println("<td>" + tabla.getValueAt(t, 2) + "</td>");
-                                    out.println("<td>" + tabla.getValueAt(t, 3) + "</td>");
-                                    out.println("<td>" + tabla.getValueAt(t, 4) + "</td>");
-                                    out.println("</tr>");
-                                }
-                            %>  
-                        </tbody>
-                    </table>
+                    <div class="table-responsive" style="max-height: 500px">
+                        <table class="table table-hover">
+                            <thead align="center">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Existencias</th>
+                                    <th>Precio (Q)</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl_inventario" align="center">
+                                <%
+                                    inventarioT inventario = new inventarioT();
+                                    DefaultTableModel tabla = new DefaultTableModel();
+                                    tabla = inventario.leer();
+                                    for (int t = 0; t < tabla.getRowCount(); t++) {
+                                        out.println("<td>" + tabla.getValueAt(t, 0) + "</td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 1) + "</td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 2) + "</td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 3) + "</td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 4) + "</td>");
+                                        out.println("</tr>");
+                                    }
+                                %>  
+                            </tbody>
+                        </table>
+                    </div>                    
                 </div>
             </div>
         </div>    
+
         <script type="text/javascript">
             function limpiar() {
 
@@ -143,7 +146,6 @@
                 $("#btn_eliminar").show(1);
                 $("#btn_agregar").hide(1);
             });
-
         </script>
     </body>
 </html>

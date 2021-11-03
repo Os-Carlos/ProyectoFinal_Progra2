@@ -7,7 +7,7 @@
 <%@page import="javax.swing.table.DefaultTableModel"%>
 <%@page import="modelo.GrupoPermisos"%>
 <%@page import="java.util.HashMap"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,7 +20,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     </head>
     <body>
-        <nav class="navbar navbar-light my-0" style="background-color: #e3f2fd;"><h1>FORMULARIO PERMISOS DE GRUPO </h1></nav>  
+        <nav class="navbar navbar-light justify-content-center my-0" style="background-color: #e3f2fd;"><h1>PERMISOS DE GRUPO</h1></nav>  
 
         <!--alertas-->
         <div class="d-flex justify-content-center py-1" id="div_alertas">
@@ -28,19 +28,19 @@
                 if (request.getParameter("accion") != null) {
                     if (request.getParameter("accion").equals("A")) {
                         out.println("<div class='alert alert-success alert-dismissible' role='alert'>");
-                        out.println("Registro Realizado con Ã‰xito!!");
+                        out.println("Registro Realizado con Éxito!!");
                         out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
                         out.println("</div>");
                     }
                     if (request.getParameter("accion").equals("M")) {
                         out.println("<div class='alert alert-info alert-dismissible' role='alert'>");
-                        out.println("Registro Modificado con Ã‰xito!!");
+                        out.println("Registro Modificado con Éxito!!");
                         out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
                         out.println("</div>");
                     }
                     if (request.getParameter("accion").equals("E")) {
                         out.println("<div class='alert alert-warning alert-dismissible' role='alert'>");
-                        out.println("Registro Eliminado con Ã‰xito!!");
+                        out.println("Registro Eliminado con Éxito!!");
                         out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
                         out.println("</div>");
                     }

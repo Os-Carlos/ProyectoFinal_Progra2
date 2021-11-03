@@ -6,7 +6,7 @@
 
 <%@page import="javax.swing.table.DefaultTableModel"%>
 <%@page import="modelo.GrupoUsuarios"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,7 +20,7 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-light my-0" style="background-color: #e3f2fd;"><h1>FORMULARIO GRUPOS </h1></nav>  
+        <nav class="navbar navbar-light justify-content-center my-0" style="background-color: #e3f2fd;"><h1>GRUPOS</h1></nav>  
 
         <!--alertas-->
         <div class="d-flex justify-content-center py-1" id="div_alertas">
@@ -28,19 +28,19 @@
                 if (request.getParameter("accion") != null) {
                     if (request.getParameter("accion").equals("A")) {
                         out.println("<div class='alert alert-success alert-dismissible' role='alert'>");
-                        out.println("Registro Realizado con Ã‰xito!!");
+                        out.println("Registro Realizado con Éxito!!");
                         out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
                         out.println("</div>");
                     }
                     if (request.getParameter("accion").equals("M")) {
                         out.println("<div class='alert alert-info alert-dismissible' role='alert'>");
-                        out.println("Registro Modificado con Ã‰xito!!");
+                        out.println("Registro Modificado con Éxito!!");
                         out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
                         out.println("</div>");
                     }
                     if (request.getParameter("accion").equals("E")) {
                         out.println("<div class='alert alert-warning alert-dismissible' role='alert'>");
-                        out.println("Registro Eliminado con Ã‰xito!!");
+                        out.println("Registro Eliminado con Éxito!!");
                         out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
                         out.println("</div>");
                     }
@@ -58,9 +58,9 @@
             <div class="row">
                 <div class="col">
                     <form action="../srv_Grupos" method="POST">   
-                        <label for="lbl_IdGrupo" id="lbl_IdGrupo" style="display: none"><b>IdGrupo</b></label>
+                        <label for="lbl_IdGrupo" id="lbl_IdGrupo" style="display: none"><b>Id Grupo</b></label>
                         <input type="text" class="form-control" name="txt_IdGrupo" id="txt_IdGrupo" readonly value="0" style="display: none">
-                        <label for="lbl_nombre" ><b>Nombre Grupo:</b></label>
+                        <label for="lbl_nombre" ><b>Nombre Grupo</b></label>
                         <input type="text" class="form-control" name="txt_nombre" id="txt_nombre" required>      
                         </div>
                         <div class="col pt-4">                      
@@ -79,8 +79,8 @@
                         <table class="table table-hover" id="tbl_Grupousuarios" >
                             <thead align="center">
                                 <tr>
-                                    <th>IdGrupo</th>
-                                    <th>nombre</th>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
                                 </tr>
                             </thead>
                             <tbody align="center">

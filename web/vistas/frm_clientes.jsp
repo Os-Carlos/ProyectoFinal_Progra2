@@ -56,7 +56,7 @@
             <!--barra de busqueda-->
             <nav class="navbar navbar-light my-0" style="background-color: #e3f2fd;">  
                 <div class="container">
-                    <h3 style="color: #000000;">Clientes</h3>
+                    <h1 style="color: #000000;">Clientes</h1>
                     <div class="input-group w-50">
                         <span class="input-group-text">
                             <i class="bi bi-search"></i>

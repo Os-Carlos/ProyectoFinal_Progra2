@@ -6,7 +6,7 @@
 
 <%@page import="javax.swing.table.DefaultTableModel"%>
 <%@page import="modelo.ventas"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,7 +20,7 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-light my-0" style="background-color: #e3f2fd;"><h1>FORMULARIO VENTAS </h1></nav>  
+        <nav class="navbar navbar-light justify-content-center my-0" style="background-color: #e3f2fd;"><h1>VENTAS</h1></nav>  
 
         <!--alertas-->
         <div class="d-flex justify-content-center py-1" id="div_alertas">
@@ -28,19 +28,19 @@
                 if (request.getParameter("accion") != null) {
                     if (request.getParameter("accion").equals("A")) {
                         out.println("<div class='alert alert-success alert-dismissible' role='alert'>");
-                        out.println("Registro Realizado con Ã‰xito!!");
+                        out.println("Registro Realizado con Éxito!!");
                         out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
                         out.println("</div>");
                     }
                     if (request.getParameter("accion").equals("M")) {
                         out.println("<div class='alert alert-info alert-dismissible' role='alert'>");
-                        out.println("Registro Modificado con Ã‰xito!!");
+                        out.println("Registro Modificado con Éxito!!");
                         out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
                         out.println("</div>");
                     }
                     if (request.getParameter("accion").equals("E")) {
                         out.println("<div class='alert alert-warning alert-dismissible' role='alert'>");
-                        out.println("Registro Eliminado con Ã‰xito!!");
+                        out.println("Registro Eliminado con Éxito!!");
                         out.println("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
                         out.println("</div>");
                     }
@@ -58,13 +58,13 @@
             <div class="row" id="contenido">
                 <div class="col">
                     <form action="../srv_ventas" method="POST">   
-                        <label for="lbl_Idventa" id="lbl_venta" style="display:none"><b>Idventa</b></label>
+                        <label for="lbl_Idventa" id="lbl_venta" style="display:none"><b>Id</b></label>
                         <input type="text" class="form-control" name="txt_venta" id="txt_venta" style="display:none" readonly value="0">
                         <label for="lbl_fecha" ><b>Fecha</b></label>
                         <input type="date" class="form-control" name="txt_fecha" id="txt_fecha"required>
-                        <label for="lbl_codigo" ><b>Codigo</b></label>
+                        <label for="lbl_codigo" ><b>Código</b></label>
                         <input type="text" class="form-control" name="txt_codigo" id="txt_codigo"required>
-                        <label for="lbl_idcliente" ><b>Id del Cliente</b></label>
+                        <label for="lbl_idcliente" ><b>Id Cliente</b></label>
                         <input type="text" class="form-control" name="txt_idcliente" id="txt_idcliente"required>
                         <br>
                         <button type="button" id="btn_limpiar" name="btn_limpiar" class="btn btn-primary" style="display:none" onclick="limpiar()"><i class="bi bi-eraser"></i>Limpiar</button> 
@@ -76,7 +76,7 @@
 
                     <!--formulario reportes-->
                     <div class="container py-4" style="text-align: center">
-                        <label><b>Reporte de ventas</b></label>
+                        <label><b>Reporte de Ventas</b></label>
                         <form action="../reportes/reporte.jsp">       
                             <div class="row">
                                 <div class="col">
@@ -92,36 +92,35 @@
 
                 </div>
                 <div class="col">
-                    <table class="table table-hover">
-                        <thead align="center">
-                            <tr>
-                                <th>Idventa</th>
-                                <th>Fecha</th>
-                                <th>Codigo</th>
-                                <th>Id_Cliente</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbl_ventas" align="center">
-                            <%
-                                ventas venta = new ventas();
-                                DefaultTableModel tabla = new DefaultTableModel();
-                                tabla = venta.leer();
-                                for (int t = 0; t < tabla.getRowCount(); t++) {
-                                    out.println("<tr>");
-                                    out.println("<td>" + tabla.getValueAt(t, 0) + "</td>");
-                                    out.println("<td>" + tabla.getValueAt(t, 1) + "</td>");
-                                    out.println("<td>" + tabla.getValueAt(t, 2) + "</td>");
-                                    out.println("<td>" + tabla.getValueAt(t, 3) + "</td>");
-                                    out.println("</tr>");
-                                }
-                            %>  
-                        </tbody>
-                    </table>
+                    <div class="table-responsive" style="max-height: 500px">
+                        <table class="table table-hover">
+                            <thead align="center">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Fecha</th>
+                                    <th>Código</th>
+                                    <th>Id Cliente</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl_ventas" align="center">
+                                <%
+                                    ventas venta = new ventas();
+                                    DefaultTableModel tabla = new DefaultTableModel();
+                                    tabla = venta.leer();
+                                    for (int t = 0; t < tabla.getRowCount(); t++) {
+                                        out.println("<tr>");
+                                        out.println("<td>" + tabla.getValueAt(t, 0) + "</td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 1) + "</td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 2) + "</td>");
+                                        out.println("<td>" + tabla.getValueAt(t, 3) + "</td>");
+                                        out.println("</tr>");
+                                    }
+                                %>  
+                            </tbody>
+                        </table>
+                    </div>                    
                 </div>
             </div>
-
-
-
         </div>    
 
         <script type="text/javascript">

@@ -20,7 +20,7 @@
     </head>
 
     <body>        
-        <nav class="navbar navbar-light my-0" style="background-color: #e3f2fd;"><h1>FORMULARIO USUARIOS </h1></nav>  
+        <nav class="navbar navbar-light justify-content-center my-0" style="background-color: #e3f2fd;"><h1>USUARIOS</h1></nav>  
 
         <!--alertas-->
         <div class="d-flex justify-content-center py-1" id="div_alertas">
